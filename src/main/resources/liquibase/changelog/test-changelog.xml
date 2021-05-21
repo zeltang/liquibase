@@ -1,0 +1,13 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="20210505-01" author="tangzelong">
+        <comment>测试</comment>
+        <sql>
+            <![CDATA[INSERT INTO `autoassess`.`brand`(`brand_code`, `brand_name`) VALUES ('ZLT05', 'ZLT05');]]>
+        </sql>
+    </changeSet>
+</databaseChangeLog>
