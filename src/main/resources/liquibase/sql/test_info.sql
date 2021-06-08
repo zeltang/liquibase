@@ -1,0 +1,1 @@
+INSERT INTO tzl.table_info_one (code, name, num) value ('12', '34', 99);

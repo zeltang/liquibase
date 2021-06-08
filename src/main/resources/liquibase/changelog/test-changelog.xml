@@ -4,10 +4,78 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
          http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
 
-    <changeSet id="20210505-01" author="tangzelong">
+    <!--<changeSet id="20210505-01" author="tangzelong">
         <comment>测试</comment>
         <sql>
-            <![CDATA[INSERT INTO `autoassess`.`brand`(`brand_code`, `brand_name`) VALUES ('ZLT05', 'ZLT05');]]>
+            <![CDATA[INSERT INTO `liquibase`.`test_liquibase`(`code`, `name`) VALUES ('ZLT05', 'ZLT05');]]>
+        </sql>
+    </changeSet>-->
+
+
+    <!--<createTable>表是创建表   tableName 表
+    <column>  字段标签，
+    name：字段名称  
+    type：字段类型  
+    encoding：编码类型
+    remarks：字段注释
+    <constraints> 主键标签  
+    primaryKey：是否主键
+    Nullable：是否为空
+    -->
+    <changeSet id="20210528-04" author="tangzelong">
+        <comment>新建表方法1</comment>
+        <createTable schemaName="tzl" tableName="table_info_one" remarks="表">
+            <column name="id" type="int(64)" encoding="utf8" remarks="id" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="varchar(255)" encoding="utf8" remarks="名字" defaultValue="1"/>
+        </createTable>
+        <modifySql dbms="mysql">
+            <append value="ENGINE=INNODB DEFAULT CHARSET utf8mb4 COLLATE utf8mb4_general_ci"/>
+        </modifySql>
+    </changeSet>
+    <changeSet id="20210528-03" author="tangzelong">
+        <comment>新建表方法2</comment>
+        <sql>
+            <![CDATA[
+            CREATE TABLE `tzl`.`table_info_two` (
+            `id` int NOT NULL AUTO_INCREMENT,
+            `name` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
+            PRIMARY KEY (`id`)
+            ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+            ]]>
         </sql>
     </changeSet>
+
+    <changeSet id="20210528-05" author="tangzelong">
+        <comment>新增字段</comment>
+        <addColumn schemaName="tzl" tableName="table_info_one">
+            <column name="code"  type="varchar(255)" encoding="utf8" remarks="编码"/>
+            <column name="num"  type="int(64)"/>
+        </addColumn>
+    </changeSet>
+
+    <changeSet id="20210528-06" author="tangzelong">
+        <comment>插入</comment>
+        <insert schemaName="tzl" tableName="table_info_one">
+            <column name="name" value="haha"/>
+            <column name="code" value="hahaha"/>
+            <column name="num" valueNumeric="999"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="20210528-07" author="tangzelong">
+        <comment>修改</comment>
+        <update schemaName="tzl" tableName="table_info_one">
+            <column name="name" value="123"/>
+            <where>code="hahaha"</where>
+        </update>
+    </changeSet>
+
+    <changeSet id="20210528-08" author="tangzelong">
+        <sqlFile path="liquibase/sql/test_info.sql" relativeToChangelogFile="false"/>
+    </changeSet>
+
+
+
 </databaseChangeLog>
